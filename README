@@ -13,13 +13,13 @@ Usage (as root):
     chmod +x /usr/bin/dazzle
 
     # Initial Dazzle setup
-    dazzle setup
+    dazzle setup USER_NAME
 
     # Link a SparkleShare client
-    dazzle link
+    dazzle link USER_NAME
 
     # Create a new project
-    dazzle create PROJECT_NAME
+    dazzle create USER_NAME PROJECT_NAME
 
 
 ## Configuration
@@ -32,6 +32,5 @@ You can control almost all configuration options via environment variables:
 
 Available options are the following:
 
-* DAZZLE_USER: the Dazzle user. Defaults to "storage".
 * DAZZLE_GROUP: the Dazzle group. Defaults to "storage".
 * DAZZLE_HOME: the directory used to store projects. Defaults to "/home/storage".
