@@ -25,20 +25,15 @@ GIT=`which git`
 BOLD=`tput bold`
 NORMAL=`tput sgr0`
 
-# Nice defaults
-DAZZLE_USER="${DAZZLE_USER:-storage}"
-DAZZLE_GROUP="${DAZZLE_GROUP:-$DAZZLE_USER}"
-DAZZLE_HOME="${DAZZLE_HOME:-/home/$DAZZLE_USER}"
-
 show_help () {
     echo "${BOLD}Dazzle, SparkleShare host setup script${NORMAL}"
     echo "This script needs to be run as root"
     echo
     echo "Usage: dazzle [COMMAND]"
     echo
-    echo "  setup                            configures this machine to serve as a SparkleShare host"
-    echo "  create PROJECT_NAME              creates a SparkleShare project called PROJECT_NAME"
-    echo "  create-encrypted PROJECT_NAME    creates an encrypted SparkleShare project"
+    echo "  setup  USER_NAME                          configures this machine to serve as a SparkleShare host"
+    echo "  create USER_NAME PROJECT_NAME              creates a SparkleShare project called PROJECT_NAME"
+    echo "  create-encrypted USER_NAME PROJECT_NAME    creates an encrypted SparkleShare project"
     echo "  link                             links a SparkleShare client to this host by entering a link code"
     echo
 }
@@ -223,11 +218,15 @@ link_client () {
 
 
 # Parse the command line arguments
+# Nice defaults
+DAZZLE_USER="${DAZZLE_USER:-$2}"
+DAZZLE_GROUP="${DAZZLE_GROUP:-storage}"
+DAZZLE_HOME="${DAZZLE_HOME:-/home/$DAZZLE_USER}"
 case $1 in
   setup)
     echo "${BOLD} 1/4 | Installing the Git package...${NORMAL}"
     install_git
-    echo "${BOLD} 2/4 | Creating account \"$DAZZLE_USER\"...${NORMAL}"
+    echo "${BOLD} 2/4 | Creating account \"$2\"...${NORMAL}"
     create_account
     echo "${BOLD} 3/4 | Configuring account \"$DAZZLE_USER\"...${NORMAL}"
     configure_ssh
@@ -235,22 +234,22 @@ case $1 in
     reload_ssh_config
     echo
     echo "${BOLD}Setup complete!${NORMAL}"
-    echo "To create a new project, run \"dazzle create PROJECT_NAME\"."
+    echo "To create a new project, run \"dazzle create USER_NAME PROJECT_NAME\"."
     echo
     ;;
 
   create)
-    echo "${BOLD}Creating project \"$2\"...${NORMAL}"
-    create_project $2
+    echo "${BOLD}Creating project \"$2\'s $3\"...${NORMAL}"
+    create_project $3
     ;;
 
   create-encrypted)
-    echo "${BOLD}Creating encrypted project \"$2\"...${NORMAL}"
-    create_project $2-crypto
+    echo "${BOLD}Creating encrypted project \"$2\'s $3\"...${NORMAL}"
+    create_project $3-crypto
     ;;
 
   link)
-    link_client $2
+    link_client $3
     ;;
 
   *|help)
