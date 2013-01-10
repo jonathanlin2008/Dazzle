@@ -33,4 +33,4 @@ You can control almost all configuration options via environment variables:
 Available options are the following:
 
 * DAZZLE_GROUP: the Dazzle group. Defaults to "storage".
-* DAZZLE_HOME: the directory used to store projects. Defaults to "/home/storage".
+* DAZZLE_HOME: the directory used to store projects. Defaults to "/home/USER_NAME".
