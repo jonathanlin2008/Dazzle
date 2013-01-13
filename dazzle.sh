@@ -39,7 +39,7 @@ show_help () {
     echo "  setup  USER_NAME                          configures this machine to serve as a SparkleShare host"
     echo "  create USER_NAME PROJECT_NAME              creates a SparkleShare project called PROJECT_NAME"
     echo "  create-encrypted USER_NAME PROJECT_NAME    creates an encrypted SparkleShare project"
-    echo "  link                             links a SparkleShare client to this host by entering a link code"
+    echo "  link  USER_NAME                             links a SparkleShare client to this host by entering a link code"
     echo
 }
 
