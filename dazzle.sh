@@ -25,6 +25,11 @@ GIT=`which git`
 BOLD=`tput bold`
 NORMAL=`tput sgr0`
 
+# Nice defaults
+DAZZLE_USER="${DAZZLE_USER:-$2}"
+DAZZLE_GROUP="${DAZZLE_GROUP:-storage}"
+DAZZLE_HOME="${DAZZLE_HOME:-/home/$DAZZLE_USER}"
+
 show_help () {
     echo "${BOLD}Dazzle, SparkleShare host setup script${NORMAL}"
     echo "This script needs to be run as root"
@@ -216,12 +221,7 @@ link_client () {
   fi
 }
 
-
 # Parse the command line arguments
-# Nice defaults
-DAZZLE_USER="${DAZZLE_USER:-$2}"
-DAZZLE_GROUP="${DAZZLE_GROUP:-storage}"
-DAZZLE_HOME="${DAZZLE_HOME:-/home/$DAZZLE_USER}"
 case $1 in
   setup)
     echo "${BOLD} 1/4 | Installing the Git package...${NORMAL}"
@@ -249,6 +249,7 @@ case $1 in
     ;;
 
   link)
+    echo "link to user $2 "
     link_client $3
     ;;
 
